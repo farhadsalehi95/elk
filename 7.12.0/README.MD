@@ -1,7 +1,6 @@
 docker build -t (your_image_name) .
 
-create container from your image .
-
-docker exec (your_container_name) url -XPUT 'http://localhost:9200/_license' -H "Content-Type: application/json" -d @lic.json
+docker run -itd --name elasticsearch -p 9200:9200 -p 9300:9300 -e discovery.type=single-node -e ES_JAVA_OPTS="-Xms512m -Xmx512m" (your_image_name)
+docker exec elasticsearch curl -XPUT 'http://localhost:9200/_license' -H "Content-Type: application/json" -d @lic.json
 
 enjoyed :)
